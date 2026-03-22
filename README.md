@@ -1,55 +1,50 @@
-# Agents Agile Workflow Plugin
+# Agents Agile Workflow
 
-AI 团队的 Sprint 协作插件。
+AI 团队协作的 Agents + Skill。
 
 ## 安装
 
-### Step 1: 配置插件
-
-编辑 `~/.config/opencode/opencode.json`:
-
-```json
-{
-  "plugin": [
-    "git+https://github.com/MofiU/agents-agile-workflow-plugin.git"
-  ]
-}
-```
-
-### Step 2: 安装 Agent 定义
+### 1. 复制 Agent 定义
 
 ```bash
-git clone https://github.com/MofiU/agents-agile-workflow-plugin.git /tmp/agile-plugin
-cp /tmp/agile-plugin/agents/*.md ~/.config/opencode/agents/
+git clone https://github.com/MofiU/agents-agile-workflow-plugin.git /tmp/agile
+cp -r /tmp/agile/.agents/agents/*.md ~/.config/opencode/agents/
+```
+
+### 2. 复制 Skill
+
+```bash
+cp -r /tmp/agile/.agents/SKILL.md ~/.config/opencode/skills/agile-workflow.md
 ```
 
 ## 使用
 
-直接说话，插件自动路由到合适的 Agent：
+直接说话，Skill 会路由到合适的 Agent：
 
 | 你说 | 路由到 |
 |-----|-------|
-| "开始一个 Sprint" | sprint-master |
-| "开个站会" | sprint-master |
-| "添加一个任务" | product-owner |
-| "开始开发 XXX" | developer-agent |
-| "测试一下" | qa-agent |
-| "评审这个 PR" | code-reviewer |
-| "有阻塞" | sprint-master |
+| "开始 Sprint" | @sprint-master |
+| "站会" | @sprint-master |
+| "添加任务" | @product-owner |
+| "开始开发" | @developer-agent |
+| "测试" | @qa-agent |
+| "评审 PR" | @code-reviewer |
 
-## 角色
+## Agents
 
 | Agent | 职责 |
 |-------|------|
-| sprint-master | 主持 Sprint、跟踪状态、协调 |
-| product-owner | 定义任务、优先级 |
-| developer-agent | 开发执行 |
+| sprint-master | 主持 Sprint、站会、跟踪状态 |
+| product-owner | 定义任务、设置优先级 |
+| developer-agent | 开发执行、TDD |
 | qa-agent | 测试验证 |
 | code-reviewer | 代码评审 |
 
-## 协议
+## 工作流程
 
-协作协议在 `protocols/sprint-protocol.md`。
+```
+计划 → 执行(TDD) → 测试 → 评审 → 合并
+```
 
 ## License
 
