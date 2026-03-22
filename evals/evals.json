@@ -1,0 +1,589 @@
+{
+  "test_suite": "agile-workflow",
+  "version": "1.0.0",
+  "agents": [
+    {
+      "name": "agile-product-owner",
+      "tests": [
+        {
+          "id": "po-001",
+          "description": "PO 能理解用户需求并记录为用户故事",
+          "input": "做一个用户登录功能，用户名密码登录",
+          "assertions": [
+            {
+              "type": "contains",
+              "pattern": "作为.*我希望.*以便"
+            },
+            {
+              "type": "contains",
+              "pattern": "验收标准"
+            },
+            {
+              "type": "not_contains",
+              "pattern": "React|Vue|JWT|Session"
+            }
+          ]
+        },
+        {
+          "id": "po-002",
+          "description": "PO 能设置优先级",
+          "input": "添加两个功能：登录和注册，还有修改密码",
+          "assertions": [
+            {
+              "type": "contains",
+              "pattern": "P0|P1|P2|优先级"
+            },
+            {
+              "type": "order_matters"
+            }
+          ]
+        },
+        {
+          "id": "po-003",
+          "description": "PO 不做技术决策",
+          "input": "登录功能用什么技术实现比较好？",
+          "assertions": [
+            {
+              "type": "not_contains",
+              "pattern": "用 React|用 Vue|用 JWT|用 Session|SQLite|MySQL"
+            }
+          ]
+        },
+        {
+          "id": "po-004",
+          "description": "PO 需求必须清晰无歧义",
+          "input": "用户登录",
+          "assertions": [
+            {
+              "type": "asks_clarifying",
+              "patterns": ["用户名|密码|验证方式"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "agile-developer",
+      "tests": [
+        {
+          "id": "dev-001",
+          "description": "Developer 遵循 TDD",
+          "input": "用 TDD 方式实现一个计算器，加法功能",
+          "assertions": [
+            {
+              "type": "first_action",
+              "pattern": "测试|test|describe|it\\("
+            },
+            {
+              "type": "contains",
+              "pattern": "describe\\(|it\\("
+            }
+          ]
+        },
+        {
+          "id": "dev-002",
+          "description": "Developer 使用 atomic commit",
+          "input": "完成了添加用户验证功能，commit message 是什么",
+          "assertions": [
+            {
+              "type": "contains",
+              "pattern": "feat:|fix:|chore:|docs:|refactor:|test:"
+            }
+          ]
+        },
+        {
+          "id": "dev-003",
+          "description": "Developer 遵循代码规范",
+          "input": "写一个函数判断是否是闰年",
+          "assertions": [
+            {
+              "type": "no_magic_numbers"
+            },
+            {
+              "type": "has_comments_or_clear_names"
+            }
+          ]
+        },
+        {
+          "id": "dev-004",
+          "description": "Developer 自测后才提交",
+          "input": "实现了登录功能，准备提交",
+          "assertions": [
+            {
+              "type": "contains",
+              "pattern": "测试.*通过|running|passed"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "agile-qa",
+      "tests": [
+        {
+          "id": "qa-001",
+          "description": "QA 缺陷报告完整可复现",
+          "input": "用户反映登录页面打不开，报 500 错误",
+          "assertions": [
+            {
+              "type": "contains",
+              "pattern": "步骤|Step"
+            },
+            {
+              "type": "contains",
+              "pattern": "预期|期望"
+            },
+            {
+              "type": "contains",
+              "pattern": "实际"
+            },
+            {
+              "type": "contains",
+              "pattern": "环境|浏览器|版本"
+            }
+          ]
+        },
+        {
+          "id": "qa-002",
+          "description": "QA 验证所有验收标准",
+          "input": "登录功能有这些验收标准：1. 正确密码能登录 2. 错误密码返回 401 3. token 过期返回 401",
+          "assertions": [
+            {
+              "type": "all_criteria_covered",
+              "count": 3
+            }
+          ]
+        },
+        {
+          "id": "qa-003",
+          "description": "QA 缺陷等级正确",
+          "input": "用户头像不显示和用户无法登录，哪个优先级更高？",
+          "assertions": [
+            {
+              "type": "prioritizes_blocking",
+              "blocking": "登录",
+              "non_blocking": "头像"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "agile-scrum-master",
+      "tests": [
+        {
+          "id": "sm-001",
+          "description": "SM 站会包含三要素",
+          "input": "主持今天的站会，开发者说昨天完成了登录，今天做注册",
+          "assertions": [
+            {
+              "type": "contains",
+              "pattern": "昨天"
+            },
+            {
+              "type": "contains",
+              "pattern": "今天"
+            },
+            {
+              "type": "contains",
+              "pattern": "阻塞|block"
+            }
+          ]
+        },
+        {
+          "id": "sm-002",
+          "description": "SM 识别阻塞并升级",
+          "input": "开发者说等待 UI 设计稿，已经等了 2 天",
+          "assertions": [
+            {
+              "type": "escalates",
+              "pattern": "升级|通知|协调"
+            },
+            {
+              "type": "shows_concern"
+            }
+          ]
+        },
+        {
+          "id": "sm-003",
+          "description": "SM Sprint 状态透明",
+          "input": "当前 Sprint 进度如何？",
+          "assertions": [
+            {
+              "type": "contains",
+              "pattern": "进度|完成|总数|tickets?"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "agile-architect",
+      "tests": [
+        {
+          "id": "arch-001",
+          "description": "Architect 提供多个方案并权衡",
+          "input": "需要实现认证，选择什么方案？",
+          "assertions": [
+            {
+              "type": "multiple_options",
+              "min_options": 2
+            },
+            {
+              "type": "tradeoffs_explained"
+            }
+          ]
+        },
+        {
+          "id": "arch-002",
+          "description": "Architect 记录 ADR",
+          "input": "选择了 JWT 方案做认证，记录这个决策",
+          "assertions": [
+            {
+              "type": "contains",
+              "pattern": "ADR|状态|上下文|决策|后果"
+            }
+          ]
+        },
+        {
+          "id": "arch-003",
+          "description": "Architect 标注技术债务",
+          "input": "当前方案有什么技术债务？",
+          "assertions": [
+            {
+              "type": "lists_debt"
+            }
+          ]
+        },
+        {
+          "id": "arch-004",
+          "description": "Architect 考虑团队能力",
+          "input": "团队都是 Java 开发者，选什么微服务框架？",
+          "assertions": [
+            {
+              "type": "considers_team",
+              "pattern": "Java|Spring Boot"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "agile-ui-ux-designer",
+      "tests": [
+        {
+          "id": "ui-001",
+          "description": "UI/UX 无障碍设计",
+          "input": "设计一个登录按钮",
+          "assertions": [
+            {
+              "type": "contains",
+              "pattern": "对比度|contrast|无障碍|accessibility"
+            },
+            {
+              "type": "contains",
+              "pattern": "键盘|keyboard|focus"
+            }
+          ]
+        },
+        {
+          "id": "ui-002",
+          "description": "UI/UX 移动优先",
+          "input": "设计一个新的列表页面",
+          "assertions": [
+            {
+              "type": "mobile_first"
+            }
+          ]
+        },
+        {
+          "id": "ui-003",
+          "description": "UI/UX 遵循设计系统",
+          "input": "用现有设计系统添加一个新按钮",
+          "assertions": [
+            {
+              "type": "follows_design_system"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "agile-devops",
+      "tests": [
+        {
+          "id": "devops-001",
+          "description": "DevOps 自动化部署",
+          "input": "写一个部署到生产环境的 pipeline",
+          "assertions": [
+            {
+              "type": "is_automated"
+            },
+            {
+              "type": "contains",
+              "pattern": "CI/CD|pipeline|github.actions|gitlab"
+            }
+          ]
+        },
+        {
+          "id": "devops-002",
+          "description": "DevOps 环境一致性",
+          "input": "dev staging prod 环境如何保持一致？",
+          "assertions": [
+            {
+              "type": "contains",
+              "pattern": "docker|container|环境变量|基础设施即代码"
+            }
+          ]
+        },
+        {
+          "id": "devops-003",
+          "description": "DevOps 监控和告警",
+          "input": "生产环境需要监控哪些指标？",
+          "assertions": [
+            {
+              "type": "monitors_critical",
+              "patterns": ["CPU|内存|延迟|错误率"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "agile-security-engineer",
+      "tests": [
+        {
+          "id": "sec-001",
+          "description": "Security 漏洞修复方案",
+          "input": "发现 SQL 注入漏洞，怎么修复？",
+          "assertions": [
+            {
+              "type": "fixes_sql_injection"
+            }
+          ]
+        },
+        {
+          "id": "sec-002",
+          "description": "Security 最小权限",
+          "input": "数据库用户权限怎么配置？",
+          "assertions": [
+            {
+              "type": "principle_of_least_privilege"
+            }
+          ]
+        },
+        {
+          "id": "sec-003",
+          "description": "Security 安全内置",
+          "input": "新功能要上传用户头像，有什么安全考虑？",
+          "assertions": [
+            {
+              "type": "security_checks",
+              "patterns": ["文件类型|大小限制|病毒扫描|存储位置"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "agile-data-engineer",
+      "tests": [
+        {
+          "id": "data-001",
+          "description": "Data 数据质量",
+          "input": "设计数据管道质量检查",
+          "assertions": [
+            {
+              "type": "quality_checks"
+            }
+          ]
+        },
+        {
+          "id": "data-002",
+          "description": "Data 血缘追踪",
+          "input": "报表数据来自哪里？怎么追溯？",
+          "assertions": [
+            {
+              "type": "lineage_tracked"
+            }
+          ]
+        },
+        {
+          "id": "data-003",
+          "description": "Data 隐私保护",
+          "input": "用户手机号怎么存储？",
+          "assertions": [
+            {
+              "type": "data_masked",
+              "pattern": "脱敏|加密|掩码"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "agile-network-engineer",
+      "tests": [
+        {
+          "id": "net-001",
+          "description": "Network 高可用",
+          "input": "设计一个高可用的网络架构",
+          "assertions": [
+            {
+              "type": "no_single_point_of_failure"
+            }
+          ]
+        },
+        {
+          "id": "net-002",
+          "description": "Network 配置文档化",
+          "input": "防火墙规则变更要记录什么？",
+          "assertions": [
+            {
+              "type": "documents_changes"
+            }
+          ]
+        },
+        {
+          "id": "net-003",
+          "description": "Network 可观测性",
+          "input": "网络监控要关注哪些指标？",
+          "assertions": [
+            {
+              "type": "monitors_network",
+              "patterns": ["带宽|延迟|丢包|连接数"]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "workflows": [
+    {
+      "id": "wf-001",
+      "name": "从需求到开发",
+      "description": "完整的功能开发流程",
+      "steps": [
+        { "agent": "agile-product-owner", "action": "接收并记录需求" },
+        { "agent": "agile-architect", "action": "架构设计" },
+        { "agent": "agile-developer", "action": "TDD 开发" },
+        { "agent": "agile-qa", "action": "测试验证" }
+      ],
+      "assertions": [
+        {
+          "type": "correct_agent_sequence",
+          "expected": ["agile-product-owner", "agile-architect", "agile-developer", "agile-qa"]
+        }
+      ]
+    },
+    {
+      "id": "wf-002",
+      "name": "Sprint 周期",
+      "description": "完整的 Sprint 流程",
+      "steps": [
+        { "agent": "agile-product-owner", "action": "准备待办" },
+        { "agent": "agile-scrum-master", "action": "启动 Sprint" },
+        { "agent": "agile-developer", "action": "开发" },
+        { "agent": "agile-scrum-master", "action": "站会" },
+        { "agent": "agile-qa", "action": "测试" },
+        { "agent": "agile-scrum-master", "action": "结束 Sprint" }
+      ]
+    },
+    {
+      "id": "wf-003",
+      "name": "缺陷处理流程",
+      "description": "从发现到关闭缺陷",
+      "steps": [
+        { "agent": "agile-qa", "action": "发现并记录缺陷" },
+        { "agent": "agile-developer", "action": "修复缺陷" },
+        { "agent": "agile-qa", "action": "验证修复" }
+      ]
+    },
+    {
+      "id": "wf-004",
+      "name": "阻塞升级流程",
+      "description": "阻塞问题的识别和解决",
+      "steps": [
+        { "agent": "agile-developer", "action": "遇到阻塞" },
+        { "agent": "agile-scrum-master", "action": "识别并升级" },
+        { "agent": "agile-scrum-master", "action": "协调解决" }
+      ]
+    },
+    {
+      "id": "wf-005",
+      "name": "安全内嵌流程",
+      "description": "安全在开发流程中内嵌",
+      "steps": [
+        { "agent": "agile-security-engineer", "action": "安全评审" },
+        { "agent": "agile-developer", "action": "开发" },
+        { "agent": "agile-security-engineer", "action": "安全测试" }
+      ]
+    }
+  ],
+  "kanban": {
+    "states": ["BACKLOG", "TODO", "IN_PROGRESS", "TESTING", "REVIEW", "DONE"],
+    "blocked_state": "BLOCKED",
+    "valid_transitions": [
+      { "from": "BACKLOG", "to": "TODO" },
+      { "from": "TODO", "to": "IN_PROGRESS" },
+      { "from": "TODO", "to": "BLOCKED" },
+      { "from": "IN_PROGRESS", "to": "TESTING" },
+      { "from": "IN_PROGRESS", "to": "BLOCKED" },
+      { "from": "BLOCKED", "to": "IN_PROGRESS" },
+      { "from": "TESTING", "to": "REVIEW" },
+      { "from": "TESTING", "to": "IN_PROGRESS" },
+      { "from": "REVIEW", "to": "DONE" },
+      { "from": "REVIEW", "to": "IN_PROGRESS" }
+    ],
+    "tests": [
+      {
+        "id": "kanban-001",
+        "description": "任务创建在 BACKLOG",
+        "input": "创建 TASK-001: 用户登录",
+        "expected_state": "BACKLOG"
+      },
+      {
+        "id": "kanban-002",
+        "description": "开始开发移动到 IN_PROGRESS",
+        "input": "TASK-001 开始开发",
+        "expected_state": "IN_PROGRESS"
+      },
+      {
+        "id": "kanban-003",
+        "description": "开发完成移动到 TESTING",
+        "input": "TASK-001 开发完成",
+        "expected_state": "TESTING"
+      },
+      {
+        "id": "kanban-004",
+        "description": "测试完成移动到 REVIEW",
+        "input": "TASK-001 测试完成",
+        "expected_state": "REVIEW"
+      },
+      {
+        "id": "kanban-005",
+        "description": "评审通过移动到 DONE",
+        "input": "TASK-001 评审通过",
+        "expected_state": "DONE"
+      },
+      {
+        "id": "kanban-006",
+        "description": "遇到阻塞移动到 BLOCKED",
+        "input": "TASK-001 被阻塞",
+        "expected_state": "BLOCKED"
+      },
+      {
+        "id": "kanban-007",
+        "description": "阻塞解决回到 IN_PROGRESS",
+        "input": "TASK-001 阻塞解决",
+        "expected_state": "IN_PROGRESS"
+      },
+      {
+        "id": "kanban-008",
+        "description": "测试失败回到 IN_PROGRESS",
+        "input": "TASK-001 测试失败",
+        "expected_state": "IN_PROGRESS"
+      }
+    ]
+  }
+}
