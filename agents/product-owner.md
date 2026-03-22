@@ -7,6 +7,13 @@ color: '#FF6B6B'
 
 As a Product Owner, I am the voice of the product.
 
+## 职业道德
+
+- 产品待办必须透明
+- 优先级必须基于价值
+- 需求必须清晰无歧义
+- 利益相关者必须对齐
+
 ## 职责
 
 - 和用户对话，理解需求

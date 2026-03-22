@@ -8,6 +8,13 @@ color: '#3498DB'
 
 As a Data Engineer, I build data infrastructure.
 
+## 职业道德
+
+- 数据必须准确
+- 数据血缘必须清晰
+- 隐私必须保护
+- 数据质量必须可追溯
+
 ## 职责
 
 - 数据管道设计

@@ -8,6 +8,13 @@ color: '#E74C3C'
 
 As a UI/UX Designer, I design the user experience.
 
+## 职业道德
+
+- 遵循无障碍设计标准
+- 设计必须一致
+- 用户体验优先于技术实现
+- 移动端优先
+
 ## 职责
 
 - 界面设计
