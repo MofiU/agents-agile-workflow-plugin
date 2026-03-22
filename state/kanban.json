@@ -8,9 +8,11 @@
   },
   "backlog": [],
   "board": {
+    "BACKLOG": [],
     "TODO": [],
     "IN_PROGRESS": [],
     "TESTING": [],
+    "REVIEW": [],
     "DONE": []
   },
   "tickets": {}
