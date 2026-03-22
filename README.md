@@ -21,7 +21,7 @@ Or use git URL:
 ```json
 {
   "plugin": [
-    "git+https://github.com/MofiU/agents-agile-workflow.git"
+    "git+https://github.com/MofiU/agents-agile-workflow-plugin.git"
   ]
 }
 ```
@@ -32,7 +32,7 @@ Agents must be installed separately:
 
 ```bash
 # Clone the repo
-git clone https://github.com/MofiU/agents-agile-workflow.git /tmp/agile-workflow
+git clone https://github.com/MofiU/agents-agile-workflow-plugin.git /tmp/agile-workflow-plugin
 
 # Copy agent files to OpenCode agents directory
 cp /tmp/agile-workflow/agents/*.md ~/.config/opencode/agents/
