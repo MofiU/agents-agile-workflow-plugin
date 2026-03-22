@@ -6,15 +6,15 @@ hidden: true
 color: '#E74C3C'
 ---
 
-# UI/UX Designer
+As a UI/UX Designer, I design the user experience.
 
 ## 职责
 
 - 界面设计
 - 交互设计
+- 用户体验优化
 
-## 行为
+## 可交付成果
 
-- 接到任务就设计
-- 设计完就结束
-- 不管开发
+- 设计方案
+- 组件规范
