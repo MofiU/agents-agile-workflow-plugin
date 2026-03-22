@@ -1,51 +1,72 @@
-# Agents Agile Workflow Plugin
+# Agile Workflow Plugin
 
-AI 团队的 Sprint 协作插件。
+AI 团队的敏捷工作流插件。基于 Multi-Agent 编排，支持中断恢复。
+
+## 架构
+
+```
+用户 → @product-owner (primary) ← 唯一入口
+              ↓ Task tool
+        sprint-master (hidden)
+        developer (hidden)
+        qa (hidden)
+        code-reviewer (hidden)
+```
+
+**只有 PO 和用户对话**，其他 Agent 输出在 PO 内部消化，不污染上下文。
 
 ## 安装
-
-### 1. 安装 Agent 定义
 
 ```bash
 git clone https://github.com/MofiU/agents-agile-workflow-plugin.git /tmp/agile
 cp -r /tmp/agile/agents/*.md ~/.config/opencode/agents/
-```
-
-### 2. 安装插件
-
-复制 `plugins/agile-workflow.js` 到 `~/.config/opencode/plugins/`:
-
-```bash
-cp /tmp/agile/plugins/agile-workflow.js ~/.config/opencode/plugins/
+mkdir -p ~/.config/opencode/state
+cp /tmp/agile/state/kanban.json ~/.config/opencode/state/
 ```
 
 ## 使用
 
-直接说话，插件自动路由到合适的 Agent：
+和 PO 对话即可：
 
-| 你说 | 路由到 |
-|-----|-------|
-| "开始 Sprint" | @sprint-master |
-| "站会" | @sprint-master |
-| "添加任务" | @product-owner |
-| "开始开发" | @developer-agent |
-| "测试" | @qa-agent |
-| "评审 PR" | @code-reviewer |
+```
+你：做一个登录功能
+PO：好的，我来安排。
+
+你：查看状态
+PO：当前 Sprint #1，进度 3/8
+
+你：有阻塞吗
+PO：TASK-003 被阻塞，等待设计稿
+```
 
 ## Agents
 
-| Agent | 职责 |
-|-------|------|
-| sprint-master | 主持 Sprint、站会、跟踪状态 |
-| product-owner | 定义任务、设置优先级 |
-| developer-agent | 开发执行、TDD |
-| qa-agent | 测试验证 |
-| code-reviewer | 代码评审 |
+| Agent | 模式 | 职责 |
+|-------|------|------|
+| product-owner | primary | 和用户对话，内部编排 |
+| sprint-master | subagent (hidden) | Sprint 管理、任务分配 |
+| developer | subagent (hidden) | 功能开发 |
+| qa | subagent (hidden) | 测试验证 |
+| code-reviewer | subagent (hidden) | 代码评审 |
 
-## 工作流程
+## 状态管理
+
+状态文件：`~/.config/opencode/state/kanban.json`
+
+- Sprint 信息
+- 看板状态
+- Ticket 详情
+
+中断后读取 kanban.json 自动恢复。
+
+## 工作流
 
 ```
-计划 → 执行(TDD) → 测试 → 评审 → 合并
+用户 → PO → Sprint Master 分配任务
+           → Developer 开发
+           → QA 测试
+           → Code Reviewer 评审
+           → PO 汇报结果
 ```
 
 ## License

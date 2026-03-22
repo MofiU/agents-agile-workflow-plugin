@@ -1,0 +1,17 @@
+{
+  "sprint": {
+    "id": null,
+    "goal": null,
+    "startDate": null,
+    "endDate": null,
+    "status": "IDLE"
+  },
+  "backlog": [],
+  "board": {
+    "TODO": [],
+    "IN_PROGRESS": [],
+    "TESTING": [],
+    "DONE": []
+  },
+  "tickets": {}
+}
