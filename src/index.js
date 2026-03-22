@@ -45,16 +45,16 @@ export default async ({ project, client, $, directory }) => {
         message: `🤖 **Agile Workflow 插件已加载**
 
 可用 Agent：
-- @product-owner - 产品负责人（主对话入口）
-- @scrum-master - Scrum Master
-- @developer - 开发
-- @qa - 测试
-- @architect - 架构
-- @ui-ux-designer - UI/UX 设计
-- @devops - 运维
-- @security-engineer - 安全
-- @data-engineer - 数据
-- @network-engineer - 网络
+- @agile-product-owner - 产品负责人（主对话入口）
+- @agile-scrum-master - Scrum Master
+- @agile-developer - 开发
+- @agile-qa - 测试
+- @agile-architect - 架构
+- @agile-ui-ux-designer - UI/UX 设计
+- @agile-devops - 运维
+- @agile-security-engineer - 安全
+- @agile-data-engineer - 数据
+- @agile-network-engineer - 网络
 
 状态文件：${stateFile}`
       };
