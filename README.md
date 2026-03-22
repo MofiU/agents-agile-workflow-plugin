@@ -1,25 +1,27 @@
-# Agents Agile Workflow
+# Agents Agile Workflow Plugin
 
-AI 团队协作的 Agents + Skill。
+AI 团队的 Sprint 协作插件。
 
 ## 安装
 
-### 1. 复制 Agent 定义
+### 1. 安装 Agent 定义
 
 ```bash
 git clone https://github.com/MofiU/agents-agile-workflow-plugin.git /tmp/agile
-cp -r /tmp/agile/.agents/agents/*.md ~/.config/opencode/agents/
+cp -r /tmp/agile/agents/*.md ~/.config/opencode/agents/
 ```
 
-### 2. 复制 Skill
+### 2. 安装插件
+
+复制 `plugins/agile-workflow.js` 到 `~/.config/opencode/plugins/`:
 
 ```bash
-cp -r /tmp/agile/.agents/SKILL.md ~/.config/opencode/skills/agile-workflow.md
+cp /tmp/agile/plugins/agile-workflow.js ~/.config/opencode/plugins/
 ```
 
 ## 使用
 
-直接说话，Skill 会路由到合适的 Agent：
+直接说话，插件自动路由到合适的 Agent：
 
 | 你说 | 路由到 |
 |-----|-------|
