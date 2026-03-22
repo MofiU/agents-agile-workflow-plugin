@@ -1,22 +1,12 @@
 # Agents Agile Workflow Plugin
 
-Multi-agent sprint orchestration for autonomous AI teams in OpenCode.
+AI 团队的 Sprint 协作插件。
 
-## Installation
+## 安装
 
-### Step 1: Install the plugin
+### Step 1: 配置插件
 
-Add to your `opencode.json`:
-
-```json
-{
-  "plugin": [
-    "agents-agile-workflow"
-  ]
-}
-```
-
-Or use git URL:
+编辑 `~/.config/opencode/opencode.json`:
 
 ```json
 {
@@ -26,47 +16,40 @@ Or use git URL:
 }
 ```
 
-### Step 2: Copy agent files
-
-Agents must be installed separately:
+### Step 2: 安装 Agent 定义
 
 ```bash
-# Clone the repo
-git clone https://github.com/MofiU/agents-agile-workflow-plugin.git /tmp/agile-workflow-plugin
-
-# Copy agent files to OpenCode agents directory
-cp /tmp/agile-workflow/agents/*.md ~/.config/opencode/agents/
+git clone https://github.com/MofiU/agents-agile-workflow-plugin.git /tmp/agile-plugin
+cp /tmp/agile-plugin/agents/*.md ~/.config/opencode/agents/
 ```
 
-## Usage
+## 使用
 
-After installation, activate agents in conversation:
+直接说话，插件自动路由到合适的 Agent：
 
-```
-@agile-sprint-master  # Sprint orchestration
-@agile-product-owner  # Goal & priority definition  
-@agile-developer-agent  # Task execution with TDD
-@agile-qa-agent  # Quality verification
-@agile-code-reviewer  # PR reviews
-```
+| 你说 | 路由到 |
+|-----|-------|
+| "开始一个 Sprint" | sprint-master |
+| "开个站会" | sprint-master |
+| "添加一个任务" | product-owner |
+| "开始开发 XXX" | developer-agent |
+| "测试一下" | qa-agent |
+| "评审这个 PR" | code-reviewer |
+| "有阻塞" | sprint-master |
 
-## Plugin Hooks
+## 角色
 
-The plugin provides automatic agent suggestions:
+| Agent | 职责 |
+|-------|------|
+| sprint-master | 主持 Sprint、跟踪状态、协调 |
+| product-owner | 定义任务、优先级 |
+| developer-agent | 开发执行 |
+| qa-agent | 测试验证 |
+| code-reviewer | 代码评审 |
 
-- Detects agile keywords in tasks
-- Suggests appropriate agent automatically
-- Tracks sprint workflow state
+## 协议
 
-## Agents
-
-| Agent | File | Responsibility |
-|-------|------|----------------|
-| **Sprint Master** | `agents/sprint-master.md` | Orchestrates sprints, tracks metrics |
-| **Product Owner** | `agents/product-owner.md` | Defines goals, prioritizes |
-| **Developer Agent** | `agents/developer-agent.md` | Executes tasks, TDD |
-| **QA Agent** | `agents/qa-agent.md` | Verifies quality |
-| **Code Reviewer** | `agents/code-reviewer.md` | Reviews PRs |
+协作协议在 `protocols/sprint-protocol.md`。
 
 ## License
 
