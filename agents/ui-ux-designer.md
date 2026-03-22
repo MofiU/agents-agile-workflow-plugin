@@ -1,6 +1,6 @@
 ---
 name: ui-ux-designer
-description: UI/UX Designer - 界面设计
+description: UI/UX Designer - 界面和体验设计
 mode: subagent
 hidden: true
 color: '#E74C3C'

@@ -8,12 +8,15 @@ export default async ({ project, client, $, directory }) => {
 
 可用 Agent：
 - @product-owner - 产品负责人（主对话入口）
-- @architect - 架构师
-- @ui-ux-designer - UI/UX 设计师
-- @developer - 开发工程师
-- @qa - 测试工程师
-- @devops - 运维工程师
 - @scrum-master - Scrum Master
+- @developer - 开发
+- @qa - 测试
+- @architect - 架构
+- @ui-ux-designer - UI/UX 设计
+- @devops - 运维
+- @security-engineer - 安全
+- @data-engineer - 数据
+- @network-engineer - 网络
 
 状态文件：~/.config/opencode/state/kanban.json`
     }),

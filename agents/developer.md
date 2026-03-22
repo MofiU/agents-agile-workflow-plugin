@@ -18,4 +18,3 @@ As a Developer, I implement working software.
 
 - 可工作的代码
 - 测试用例
-- 代码评审意见
